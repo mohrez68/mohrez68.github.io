@@ -1,12 +1,12 @@
 name = "AIMLab"
 license = "MIT"
 description = "A responsive Hugo theme for academic research labs and academic personal websites"
-homepage = "https://aillab.ir"
-demosite = "https://aillab.ir"
+homepage = "https://aimlab.ir"
+demosite = "https://aimlab.ir"
 tags = ["academic", "research", "publications", "people", "blog", "responsive", "light", "editorial", "tailwind", "multilingual", "rtl"]
 features = ["responsive", "blog", "research pages", "publications", "people directory", "multilingual", "RTL", "self-hosted fonts", "tailwind"]
 min_version = "0.123.0"
 
 [author]
   name = "Mohamadreza Jafaryani"
-  homepage = "https://aillab.ir"
+  homepage = "https://aimlab.ir"

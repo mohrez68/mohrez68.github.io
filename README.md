@@ -28,7 +28,7 @@ The generated site is written to `public/`. Hugo runs Tailwind through PostCSS, 
 
 ## Deployment
 
-A GitHub Actions workflow is included at `.github/workflows/hugo.yml`. Pushing to `main` builds the site and deploys it to GitHub Pages. The custom domain is configured in `CNAME` (`aillab.ir`).
+A GitHub Actions workflow is included at `.github/workflows/hugo.yml`. Pushing to `main` builds the site and deploys it to GitHub Pages. The custom domain is configured in `CNAME` (`aimlab.ir`).
 
 ## Project structure
 

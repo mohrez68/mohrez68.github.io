@@ -1,5 +1,5 @@
 # Hugo Site Configuration
-baseURL = "https://aillab.ir"
+baseURL = "https://aimlab.ir/"
 languageCode = "en-us"
 title = "AIM Lab"
 theme = "aimlab"
