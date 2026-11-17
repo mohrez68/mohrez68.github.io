@@ -1,0 +1,123 @@
+{{- $page := .page -}}
+{{- $showAll := .showAll | default false -}}
+{{- $showFilters := .showFilters | default false -}}
+{{- $showHeading := .showHeading | default true -}}
+{{- $borderTop := .borderTop | default true -}}
+{{- $section := $page.Site.GetPage "section" "people" -}}
+{{- $members := slice -}}
+{{- with $section }}{{ $members = .Pages.ByWeight }}{{ end -}}
+
+{{ with $section }}
+{{ if $members }}
+<section class="bg-paper py-16 sm:py-20 {{ if $borderTop }}border-t border-line{{ end }}">
+  <div class="container-wide">
+    {{ if $showHeading }}
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">{{ i18n "people" | default "People" }}</p>
+        <h2 class="section-title">{{ i18n "meetTheLab" | default "People" }}</h2>
+      </div>
+      {{ if $showAll }}
+      <a href="{{ .RelPermalink }}" class="link-more">
+        {{ i18n "allPeople" | default "All people" }}
+        {{ partial "icon.html" (dict "name" "arrow-right" "class" "h-4 w-4 rtl:rotate-180") }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{ if $showFilters }}
+    {{- $categories := slice -}}
+    {{- range $members -}}
+      {{- with .Params.category }}{{ $categories = $categories | append . }}{{ end -}}
+    {{- end -}}
+    {{- $categories = uniq $categories -}}
+    {{ if gt (len $categories) 1 }}
+    <div class="mt-8 flex flex-wrap gap-2" data-filter-bar data-filter-target="#people-grid" data-filter-empty="#people-empty" role="group" aria-label="{{ i18n "filterPeople" | default "Filter people" }}">
+      <button type="button" data-filter="all" aria-pressed="true" class="filter-btn is-active">{{ i18n "all" | default "All" }}</button>
+      {{ range $categories }}
+      {{- $label := i18n . | default (humanize .) -}}
+      <button type="button" data-filter="{{ . }}" aria-pressed="false" class="filter-btn">{{ $label }}</button>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <div id="people-grid" class="mt-10 grid gap-6 sm:grid-cols-2 {{ if gt (len $members) 2 }}lg:grid-cols-3{{ else }}mx-auto max-w-4xl{{ end }}">
+      {{ range $members }}
+      {{- $memberTitle := .Title -}}
+      {{- $photo := .Resources.GetMatch "photo.*" -}}
+      {{- $category := .Params.category -}}
+      {{- $categoryLabel := "" -}}
+      {{- with $category }}{{ $categoryLabel = i18n . | default (humanize .) }}{{ end -}}
+      {{- $words := split $memberTitle " " -}}
+      {{- $count := len $words -}}
+      {{- $initials := "" -}}
+      {{- if ge $count 2 -}}
+        {{- $first := substr (index $words (sub $count 2)) 0 1 -}}
+        {{- $last := substr (index $words (sub $count 1)) 0 1 -}}
+        {{- if eq $page.Site.Language.Lang "fa" -}}
+          {{- $initials = printf "%s %s" $first $last -}}
+        {{- else -}}
+          {{- $initials = printf "%s%s" $first $last -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $initials = substr $memberTitle 0 1 -}}
+      {{- end -}}
+      <article class="group card card-hover flex flex-col" data-filter-item data-category="{{ $category | default "other" }}">
+        <a href="{{ .RelPermalink }}" class="block overflow-hidden border-b border-line">
+          <div class="aspect-[4/3] overflow-hidden bg-brand-soft">
+            {{ with $photo }}
+            <img src="{{ .RelPermalink }}" alt="{{ $memberTitle }}" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" loading="lazy">
+            {{ else }}
+            <div class="flex h-full items-center justify-center">
+              <span class="font-heading text-5xl font-semibold tracking-tight text-brand/60">{{ upper $initials }}</span>
+            </div>
+            {{ end }}
+          </div>
+        </a>
+        <div class="flex flex-1 flex-col p-6">
+          {{ with $categoryLabel }}<p class="text-[0.7rem] font-semibold uppercase tracking-eyebrow text-accent">{{ . }}</p>{{ end }}
+          <h3 class="mt-2 font-heading text-xl font-semibold leading-snug text-ink">
+            <a href="{{ .RelPermalink }}" class="no-underline transition-colors hover:text-brand">{{ .Title }}</a>
+          </h3>
+          {{ with .Params.role }}<p class="mt-1 text-sm font-medium text-brand">{{ . }}</p>{{ end }}
+          {{ with .Params.bio }}<p class="mt-3 text-sm leading-relaxed text-ink-soft line-clamp-3">{{ . | markdownify }}</p>{{ end }}
+
+          <div class="mt-auto flex flex-wrap items-center gap-3 pt-5">
+            {{ with .Params.email }}
+            <a href="mailto:{{ . }}" class="text-muted no-underline transition-colors hover:text-brand" aria-label="{{ i18n "email" }}: {{ $memberTitle }}" title="{{ i18n "email" }}">
+              {{ partial "icon.html" (dict "name" "mail" "class" "h-4 w-4") }}
+            </a>
+            {{ end }}
+            {{ with .Params.scholar }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-muted no-underline transition-colors hover:text-brand" aria-label="{{ i18n "scholar" | default "Google Scholar" }}: {{ $memberTitle }}" title="{{ i18n "scholar" | default "Google Scholar" }}">
+              {{ partial "icon.html" (dict "name" "scholar" "class" "h-4 w-4") }}
+            </a>
+            {{ end }}
+            {{ with .Params.github }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-muted no-underline transition-colors hover:text-brand" aria-label="GitHub: {{ $memberTitle }}" title="GitHub">
+              {{ partial "icon.html" (dict "name" "github" "class" "h-4 w-4") }}
+            </a>
+            {{ end }}
+            {{ with .Params.linkedin }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-muted no-underline transition-colors hover:text-brand" aria-label="LinkedIn: {{ $memberTitle }}" title="LinkedIn">
+              {{ partial "icon.html" (dict "name" "linkedin" "class" "h-4 w-4") }}
+            </a>
+            {{ end }}
+            {{ with .Params.website }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-muted no-underline transition-colors hover:text-brand" aria-label="{{ i18n "website" }}: {{ $memberTitle }}" title="{{ i18n "website" }}">
+              {{ partial "icon.html" (dict "name" "globe" "class" "h-4 w-4") }}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+
+    <p id="people-empty" class="mt-8 text-center text-sm text-muted" role="status" hidden>{{ i18n "noMembers" | default "No members found." }}</p>
+  </div>
+</section>
+{{ end }}
+{{ end }}

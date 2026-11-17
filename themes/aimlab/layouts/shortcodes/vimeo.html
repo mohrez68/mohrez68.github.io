@@ -1,0 +1,10 @@
+{{ $id := .Get 0 }}
+<div class="my-8 aspect-video w-full">
+  <iframe
+    src="https://player.vimeo.com/video/{{ $id }}"
+    class="h-full w-full border-0"
+    title="{{ i18n "vimeoPlayerTitle" }}"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>

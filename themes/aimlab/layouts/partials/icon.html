@@ -1,0 +1,4 @@
+{{- /* Usage: partial "icon.html" (dict "name" "mail" "class" "h-4 w-4") */ -}}
+{{- $name := .name | default "arrow-right" -}}
+{{- $class := .class | default "h-4 w-4" -}}
+<svg class="{{ $class }}" aria-hidden="true" focusable="false"><use href="#i-{{ $name }}"></use></svg>

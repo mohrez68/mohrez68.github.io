@@ -1,0 +1,54 @@
+# Hugo Site Configuration
+baseURL = "https://aillab.ir"
+languageCode = "en-us"
+title = "AIM Lab"
+theme = "aimlab"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    [languages.en.params]
+      tagline = "AI in Media Laboratory"
+      hero_description = "We are an academic research lab at the intersection of artificial intelligence and media, with a strong focus on audio intelligence—including speech processing, acoustic scene analysis, sound design, and generative audio models. Our work, however, extends across the broader media landscape, encompassing computer vision, natural language understanding, and multimodal AI systems. At AIMLab, faculty members, graduate students, and researchers collaborate to bridge foundational machine learning research with practical, reproducible prototypes and open-source frameworks. "
+      hero_location = "Tehran, Iran"
+  [languages.fa]
+    languageName = "فارسی"
+    languageCode = "fa-IR"
+    weight = 2
+    [languages.fa.params]
+      tagline = "آزمایشگاه هوش مصنوعی و رسانه"
+      hero_description = "ما یک آزمایشگاه پژوهشی در تقاطع هوش مصنوعی و رسانه هستیم و بر پردازش گفتار، تحلیل صحنه‌های صوتی، طراحی صدا و مدل‌های مولد صوت تمرکز داریم. فعالیت ما حوزه‌های بینایی ماشین، درک زبان طبیعی و سامانه‌های چندوجهی را نیز دربرمی‌گیرد."
+      hero_location = "تهران، ایران"
+[build]
+  writeStats = true
+
+[params]
+name = "AIM Lab"
+firstName = "AIM"
+lastName = "Lab"
+# TODO: set the lab contact email before enabling the contact/footer sections.
+email = ""
+author = "AIM Lab"
+
+description = "AIM Lab is an academic research lab at the intersection of artificial intelligence and media, with a focus on audio intelligence, computer vision, NLP, and multimodal systems."
+
+copyright = "AIM Lab"
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+
+[server]
+  [[server.headers]]
+    for = "/**/*.css"
+    [server.headers.values]
+      Content-Type = "text/css"

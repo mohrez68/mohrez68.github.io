@@ -1,0 +1,31 @@
+{{ $alt := .Get "alt" | default (i18n "demoImageAlt") }}
+{{ $caption := .Get "caption" | default "" }}
+{{ $width := .Get "width" | default "auto" }}
+{{ $height := .Get "height" | default "auto" }}
+
+<div class="my-10">
+  {{ if .Get "link" }}
+  <a href="{{ .Get "link" }}" target="_blank" rel="noopener noreferrer" class="block">
+    <img
+      src="{{ .Get "src" }}"
+      alt="{{ $alt }}"
+      width="{{ $width }}"
+      height="{{ $height }}"
+      class="w-full rounded-sm border border-line"
+      loading="lazy"
+    >
+  </a>
+  {{ else }}
+  <img
+    src="{{ .Get "src" }}"
+    alt="{{ $alt }}"
+    width="{{ $width }}"
+    height="{{ $height }}"
+    class="w-full rounded-sm border border-line"
+    loading="lazy"
+  >
+  {{ end }}
+  {{ if $caption }}
+  <p class="mt-2 text-center text-sm text-muted">{{ $caption }}</p>
+  {{ end }}
+</div>

@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{- $publications := sort .Pages.ByWeight "Params.year" "desc" -}}
+{{- $years := slice -}}
+{{- range $publications }}{{ with .Params.year }}{{ $years = $years | append . }}{{ end }}{{ end -}}
+{{- $years = uniq $years -}}
+{{- $allTags := slice -}}
+{{- range $publications }}{{ range .Params.tags }}{{ $allTags = $allTags | append . }}{{ end }}{{ end -}}
+{{- $allTags = uniq (sort $allTags) -}}
+
+{{ partial "page-header.html" (dict "page" . "eyebrow" (i18n "publications" | default "Publications") "title" .Title "description" .Description "lead" .Content) }}
+
+<section class="bg-surface py-14 sm:py-16">
+  <div class="container-page">
+    {{ if $publications }}
+    {{ if $allTags }}
+    <div class="flex flex-wrap gap-2" data-filter-bar data-filter-target="#publication-list" data-filter-empty="#publications-empty-filter" role="group" aria-label="{{ i18n "publicationFilters" | default "Filter publications by topic" }}">
+      <button type="button" data-filter="all" aria-pressed="true" class="filter-btn is-active">{{ i18n "allPublications" | default "All publications" }}</button>
+      {{ range $allTags }}
+      <button type="button" data-filter="{{ . | urlize }}" aria-pressed="false" class="filter-btn">{{ . }}</button>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <div id="publication-list" class="mt-10">
+      {{ range $years }}
+      {{- $year := . -}}
+      <div data-filter-group class="mb-12 last:mb-0">
+        <h2 class="font-heading text-3xl font-semibold text-brand/60">{{ $year }}</h2>
+        <div class="mt-4 border-t border-line">
+          {{ range where $publications "Params.year" $year }}
+          {{- $tags := slice -}}
+          {{- range .Params.tags }}{{ $tags = $tags | append (. | urlize) }}{{ end -}}
+          <article class="grid gap-4 border-b border-line py-7 md:grid-cols-12" data-filter-item data-category="{{ delimit $tags " " }}">
+            <div class="md:col-span-9">
+              <h3 class="font-heading text-xl font-semibold leading-snug text-ink">
+                <a href="{{ .RelPermalink }}" class="no-underline transition-colors hover:text-brand">{{ .Title }}</a>
+              </h3>
+              {{ with .Params.authors }}<p class="mt-2 text-sm leading-relaxed text-ink-soft">{{ delimit . ", " }}</p>{{ end }}
+              <p class="mt-1 text-sm italic text-muted">
+                {{ with .Params.venue }}{{ . }}{{ end }}{{ if and .Params.venue .Params.year }} &middot; {{ end }}{{ with .Params.year }}{{ . }}{{ end }}
+              </p>
+              {{ with .Params.tags }}
+              <div class="mt-3 flex flex-wrap gap-2">
+                {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+              </div>
+              {{ end }}
+            </div>
+            <div class="md:col-span-3 md:text-end">
+              {{ with .Params.external_url }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand no-underline transition-colors hover:text-accent">
+                {{ i18n "viewPublication" | default "View publication" }}
+                {{ partial "icon.html" (dict "name" "external" "class" "h-3.5 w-3.5") }}
+              </a>
+              {{ end }}
+            </div>
+          </article>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+    <p id="publications-empty-filter" class="mt-8 text-center text-sm text-muted" role="status" hidden>
+      {{ i18n "noMatchingPublications" | default "No publications match this topic." }}
+    </p>
+    {{ else }}
+    <div class="border border-dashed border-line p-12 text-center">
+      <p class="text-ink-soft">{{ i18n "noPublications" | default "Publications will appear here once they are added." }}</p>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

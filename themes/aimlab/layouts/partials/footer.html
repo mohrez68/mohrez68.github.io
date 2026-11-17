@@ -1,0 +1,50 @@
+<footer class="mt-24 bg-brand text-paper">
+  <div class="container-wide py-14">
+    <div class="grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <a href="{{ .Site.Home.RelPermalink }}" class="inline-flex items-center gap-3 no-underline">
+          <span class="flex h-9 w-9 items-center justify-center rounded-sm bg-paper font-heading text-[0.72rem] font-semibold tracking-wide text-brand" aria-hidden="true">AIM</span>
+          <span class="font-heading text-xl font-semibold text-paper">{{ .Site.Title }}</span>
+        </a>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-paper/70">{{ .Site.Language.Params.tagline }}</p>
+        <div class="mt-6 text-paper/35" aria-hidden="true">
+          {{ partial "waveform.html" (dict "class" "h-8 w-44") }}
+        </div>
+      </div>
+
+      <nav class="md:col-span-3" aria-label="{{ i18n "footerNavigation" | default "Footer navigation" }}">
+        <h2 class="text-[0.7rem] font-semibold uppercase tracking-eyebrow text-paper/70">{{ i18n "explore" | default "Explore" }}</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL | relLangURL }}" class="text-paper/80 no-underline transition-colors hover:text-paper">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+
+      <div class="md:col-span-4">
+        <h2 class="text-[0.7rem] font-semibold uppercase tracking-eyebrow text-paper/70">{{ i18n "contact" | default "Contact" }}</h2>
+        <ul class="mt-4 space-y-3 text-sm text-paper/80">
+          {{ with .Site.Language.Params.hero_location }}
+          <li class="flex items-start gap-3">
+            {{ partial "icon.html" (dict "name" "pin" "class" "mt-0.5 h-4 w-4 shrink-0 text-paper/70") }}
+            <span>{{ . }}</span>
+          </li>
+          {{ end }}
+          {{ with .Site.Params.email }}
+          <li class="flex items-start gap-3">
+            {{ partial "icon.html" (dict "name" "mail" "class" "mt-0.5 h-4 w-4 shrink-0 text-paper/70") }}
+            <a href="mailto:{{ . }}" class="break-all text-paper/80 no-underline transition-colors hover:text-paper" dir="ltr">{{ . }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-paper/15">
+    <div class="container-wide flex flex-col gap-2 py-5 text-xs text-paper/55 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {{ now.Year }} {{ .Site.Title }}. {{ i18n "allRightsReserved" | default "All rights reserved." }}</p>
+      <p>{{ .Site.Language.Params.tagline }}</p>
+    </div>
+  </div>
+</footer>

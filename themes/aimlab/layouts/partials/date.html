@@ -1,0 +1,5 @@
+{{- if eq .Site.Language.Lang "fa" -}}
+  {{- .Date.Format "2006/01/02" -}}
+{{- else -}}
+  {{- .Date.Format "January 2, 2006" -}}
+{{- end -}}

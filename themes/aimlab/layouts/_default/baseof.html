@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.LanguageCode }}" dir="{{ if eq .Site.Language.Lang "fa" }}rtl{{ else }}ltr{{ end }}">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  {{ partial "head.html" . }}
+  {{- $buildStamp := resources.FromString "css/_build.css" (printf "/* build %d */\n" now.Unix) -}}
+  {{- $styles := slice $buildStamp (resources.Get "css/main.css") | resources.Concat "css/main.css" | postCSS (dict "config" "./postcss.config.js") }}
+  {{- if eq hugo.Environment "production" }}
+    {{- $styles = $styles | minify | fingerprint }}
+  {{- end }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+  {{ block "head" . }}{{ end }}
+</head>
+<body class="flex min-h-screen flex-col">
+  <a class="skip-link" href="#main-content">{{ i18n "skipToContent" | default "Skip to content" }}</a>
+  {{ partial "icons.html" . }}
+  {{ partial "nav.html" . }}
+
+  <main id="main-content" class="flex-grow">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  {{- $scripts := resources.Get "js/scripts.js" }}
+  {{- if eq hugo.Environment "production" }}
+    {{- $scripts = $scripts | minify | fingerprint }}
+  {{- end }}
+  <script src="{{ $scripts.RelPermalink }}" defer></script>
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>

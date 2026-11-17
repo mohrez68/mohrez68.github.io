@@ -1,0 +1,55 @@
+{{- $researchSection := .Site.GetPage "section" "research" -}}
+<section class="border-b border-line bg-paper">
+  <div class="container-wide grid gap-12 py-16 lg:grid-cols-12 lg:items-center lg:gap-8 lg:py-24">
+    <div class="lg:col-span-7">
+      <p class="eyebrow">{{ i18n "researchLaboratory" | default "Research laboratory" }} &middot; {{ .Site.Language.Params.hero_location }}</p>
+
+      <h1 class="mt-6 font-heading text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-7xl">{{ .Site.Title }}</h1>
+      <p class="mt-3 font-heading text-2xl font-normal italic text-brand sm:text-3xl">{{ .Site.Language.Params.tagline }}</p>
+
+      <p class="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft">{{ .Site.Language.Params.hero_description }}</p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="{{ "/research/" | relLangURL }}" class="btn-primary">
+          {{ i18n "exploreResearch" | default "Explore research" }}
+          {{ partial "icon.html" (dict "name" "arrow-right" "class" "h-4 w-4 rtl:rotate-180") }}
+        </a>
+        <a href="{{ "/publications/" | relLangURL }}" class="btn-outline">
+          {{ i18n "publications" | default "Publications" }}
+        </a>
+      </div>
+
+      {{ with $researchSection }}
+      {{ if .Pages }}
+      <div class="mt-10 max-w-2xl border-t border-line pt-5">
+        <p class="text-[0.7rem] font-semibold uppercase tracking-eyebrow text-muted">{{ i18n "researchFocus" | default "Research focus" }}</p>
+        <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {{ range .Pages.ByWeight }}
+          <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1.5 text-ink-soft no-underline transition-colors hover:text-accent">
+            <span class="h-1 w-1 rounded-full bg-accent" aria-hidden="true"></span>
+            {{ .Title }}
+          </a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+
+    <div class="lg:col-span-5">
+      <div class="mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+        {{ with resources.Get "images/logo.png" }}
+        {{- $logo := partial "image.html" (dict "resource" . "width" 1200) -}}
+        <img
+          src="{{ $logo.src }}"
+          alt="{{ $.Site.Title }} — {{ $.Site.Language.Params.tagline }}"
+          class="hero-logo h-auto w-full"
+          width="{{ $logo.width }}"
+          height="{{ $logo.height }}"
+          fetchpriority="high"
+          decoding="async">
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

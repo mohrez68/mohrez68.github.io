@@ -1,0 +1,52 @@
+# AIMLab theme – example config
+# Copy sections into your site config.toml and replace placeholders.
+
+baseURL = "https://yoursite.com"
+languageCode = "en-us"
+title = "Your Lab"
+theme = "aimlab"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    [languages.en.params]
+      tagline = "Your Lab's full name"
+      hero_description = "Short description for the hero section."
+      hero_location = "City, Country"
+  # Add more [languages.xx] blocks for other languages (fa, etc.)
+
+[build]
+  writeStats = true
+
+[params]
+  name = "Your Lab"
+  email = "your@email.com"
+  author = "Your Lab"
+  description = "One-line site description for SEO."
+  copyright = "Your Lab"
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+
+[server]
+  [[server.headers]]
+    for = "/**/*.css"
+    [server.headers.values]
+      Content-Type = "text/css"
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
+
+# The home-page artwork lives at assets/images/logo.png in the theme.
+# Replace it with a square image (1200px or larger). It is resized to WebP at build time.

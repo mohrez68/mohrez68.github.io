@@ -1,0 +1,193 @@
+# ترجمه‌های رابط کاربری سایت آزمایشگاه AIM
+
+[mainNavigation]
+other = "ناوبری اصلی"
+
+[mobileNavigation]
+other = "ناوبری موبایل"
+
+[footerNavigation]
+other = "ناوبری پایین صفحه"
+
+[skipToContent]
+other = "رفتن به محتوای اصلی"
+
+[menu]
+other = "منو"
+
+[language]
+other = "زبان"
+
+[explore]
+other = "دسترسی"
+
+[contact]
+other = "تماس"
+
+[allRightsReserved]
+other = "همهٔ حقوق محفوظ است."
+
+[researchLaboratory]
+other = "آزمایشگاه پژوهشی"
+
+[researchFocus]
+other = "تمرکز پژوهشی"
+
+[exploreResearch]
+other = "مروری بر پژوهش‌ها"
+
+[research]
+other = "پژوهش"
+
+[researchAreas]
+other = "حوزه‌های پژوهشی"
+
+[allResearch]
+other = "همهٔ پژوهش‌ها"
+
+[exploreArea]
+other = "مشاهدهٔ حوزه"
+
+[backToResearch]
+other = "بازگشت به پژوهش‌ها"
+
+[researchComingSoon]
+other = "حوزه‌های پژوهشی به‌زودی اضافه می‌شوند."
+
+[newsAndNotes]
+other = "خبرها و یادداشت‌ها"
+
+[latestFromLab]
+other = "تازه‌های آزمایشگاه"
+
+[allPosts]
+other = "همهٔ نوشته‌ها"
+
+[readNote]
+other = "خواندن یادداشت"
+
+[read_more]
+other = "ادامه مطلب"
+
+[minRead]
+other = "دقیقه مطالعه"
+
+[blog]
+other = "وب‌نوشت"
+
+[noPosts]
+other = "هنوز نوشته‌ای منتشر نشده است."
+
+[backToBlog]
+other = "بازگشت به وب‌نوشت"
+
+[publications]
+other = "مقالات"
+
+[selectedPublications]
+other = "مقالات منتخب"
+
+[allPublications]
+other = "همهٔ مقالات"
+
+[publicationFilters]
+other = "فیلتر مقاله‌ها بر اساس موضوع"
+
+[noPublications]
+other = "مقاله‌ها پس از اضافه‌شدن در این بخش نمایش داده می‌شوند."
+
+[noMatchingPublications]
+other = "مقاله‌ای با این موضوع پیدا نشد."
+
+[publicationAuthors]
+other = "نویسندگان"
+
+[publicationAbstract]
+other = "چکیده"
+
+[viewPublication]
+other = "مشاهدهٔ مقاله"
+
+[link]
+other = "پیوند"
+
+[backToPublications]
+other = "بازگشت به مقالات"
+
+[people]
+other = "اعضای آزمایشگاه"
+
+[meetTheLab]
+other = "اعضای آزمایشگاه"
+
+[allPeople]
+other = "همهٔ اعضا"
+
+[filterPeople]
+other = "فیلتر اعضا"
+
+[all]
+other = "همه"
+
+[faculty]
+other = "هیئت علمی"
+
+[msc]
+other = "پژوهشگران"
+
+[alumni]
+other = "همکاران پیشین"
+
+[member]
+other = "عضو"
+
+[noMembers]
+other = "عضوی برای نمایش یافت نشد."
+
+[backToPeople]
+other = "بازگشت به اعضا"
+
+[email]
+other = "ایمیل"
+
+[scholar]
+other = "گوگل اسکالر"
+
+[website]
+other = "وب‌سایت"
+
+[onThisPage]
+other = "در این صفحه"
+
+[topics]
+other = "موضوع‌ها"
+
+[pageNotFound]
+other = "صفحه پیدا نشد"
+
+[pageNotFoundSubtitle]
+other = "صفحه‌ای که دنبال آن هستید وجود ندارد یا جابه‌جا شده است."
+
+[goHome]
+other = "بازگشت به خانه"
+
+[viewOnGithub]
+other = "مشاهدهٔ کد در گیت‌هاب"
+
+[galleryNotFound]
+other = "تصاویر گالری پیدا نشد در"
+
+[demoImageAlt]
+other = "تصویر نمونه"
+
+[iframeIdRequired]
+other = "خطا: پارامتر id برای شورت‌کد iframe الزامی است."
+
+[fullscreen]
+other = "تمام‌صفحه"
+
+[youtubePlayerTitle]
+other = "پخش‌کنندهٔ یوتیوب"
+
+[vimeoPlayerTitle]
+other = "پخش‌کنندهٔ ویمئو"

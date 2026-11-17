@@ -1,0 +1,193 @@
+# Base UI translations for the AIM Lab theme.
+
+[mainNavigation]
+other = "Main navigation"
+
+[mobileNavigation]
+other = "Mobile navigation"
+
+[footerNavigation]
+other = "Footer navigation"
+
+[skipToContent]
+other = "Skip to content"
+
+[menu]
+other = "Menu"
+
+[language]
+other = "Language"
+
+[explore]
+other = "Explore"
+
+[contact]
+other = "Contact"
+
+[allRightsReserved]
+other = "All rights reserved."
+
+[researchLaboratory]
+other = "Research laboratory"
+
+[researchFocus]
+other = "Research focus"
+
+[exploreResearch]
+other = "Explore research"
+
+[research]
+other = "Research"
+
+[researchAreas]
+other = "Research areas"
+
+[allResearch]
+other = "All research"
+
+[exploreArea]
+other = "Explore area"
+
+[backToResearch]
+other = "Back to research"
+
+[researchComingSoon]
+other = "Research projects will be added soon."
+
+[newsAndNotes]
+other = "News & notes"
+
+[latestFromLab]
+other = "Latest from the lab"
+
+[allPosts]
+other = "All posts"
+
+[readNote]
+other = "Read note"
+
+[read_more]
+other = "Read more"
+
+[minRead]
+other = "min read"
+
+[blog]
+other = "Blog"
+
+[noPosts]
+other = "No posts yet."
+
+[backToBlog]
+other = "Back to blog"
+
+[publications]
+other = "Publications"
+
+[selectedPublications]
+other = "Selected publications"
+
+[allPublications]
+other = "All publications"
+
+[publicationFilters]
+other = "Filter publications by topic"
+
+[noPublications]
+other = "Publications will appear here once they are added."
+
+[noMatchingPublications]
+other = "No publications match this topic."
+
+[publicationAuthors]
+other = "Authors"
+
+[publicationAbstract]
+other = "Abstract"
+
+[viewPublication]
+other = "View publication"
+
+[link]
+other = "Link"
+
+[backToPublications]
+other = "Back to publications"
+
+[people]
+other = "People"
+
+[meetTheLab]
+other = "People"
+
+[allPeople]
+other = "All people"
+
+[filterPeople]
+other = "Filter people"
+
+[all]
+other = "All"
+
+[faculty]
+other = "Faculty"
+
+[msc]
+other = "MSc Students"
+
+[alumni]
+other = "Alumni"
+
+[member]
+other = "Member"
+
+[noMembers]
+other = "No members found."
+
+[backToPeople]
+other = "Back to people"
+
+[email]
+other = "Email"
+
+[scholar]
+other = "Google Scholar"
+
+[website]
+other = "Website"
+
+[onThisPage]
+other = "On this page"
+
+[topics]
+other = "Topics"
+
+[pageNotFound]
+other = "Page not found"
+
+[pageNotFoundSubtitle]
+other = "The page you are looking for does not exist or has moved."
+
+[goHome]
+other = "Go home"
+
+[viewOnGithub]
+other = "View full source on GitHub"
+
+[galleryNotFound]
+other = "Gallery images not found in"
+
+[demoImageAlt]
+other = "Demo image"
+
+[iframeIdRequired]
+other = "Error: 'id' parameter is required for the iframe shortcode."
+
+[fullscreen]
+other = "Fullscreen"
+
+[youtubePlayerTitle]
+other = "YouTube video player"
+
+[vimeoPlayerTitle]
+other = "Vimeo video player"

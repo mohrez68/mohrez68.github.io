@@ -1,0 +1,22 @@
+{{ $id := .Get "id" }}
+{{ if not $id }}
+  <p class="my-6 text-sm font-semibold text-accent">{{ i18n "iframeIdRequired" }}</p>
+{{ else }}
+<div class="relative my-8">
+  <div class="aspect-video">
+    <iframe
+      id="iframe-{{ $id }}"
+      src="{{ .Get "src" }}"
+      class="h-full w-full border-0"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+  <button
+    type="button"
+    class="absolute end-2 top-2 rounded-sm bg-paper/90 px-2 py-1 text-xs font-medium text-ink shadow"
+    onclick="document.getElementById('iframe-{{ $id }}').requestFullscreen();">
+    {{ i18n "fullscreen" }}
+  </button>
+</div>
+{{ end }}

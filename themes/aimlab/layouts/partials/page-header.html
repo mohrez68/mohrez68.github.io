@@ -1,0 +1,11 @@
+{{- $page := .page -}}
+<section class="border-b border-line bg-paper py-12 sm:py-16">
+  <div class="container-page">
+    {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    <h1 class="mt-4 font-heading text-4xl font-semibold leading-tight text-ink sm:text-5xl">{{ .title }}</h1>
+    {{ with .description }}<p class="mt-5 max-w-3xl text-lg leading-relaxed text-ink-soft">{{ . }}</p>{{ end }}
+    {{ with .lead }}
+    <div class="article-body mt-6 max-w-3xl text-base">{{ . }}</div>
+    {{ end }}
+  </div>
+</section>

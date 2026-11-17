@@ -1,0 +1,70 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#fbfaf7" />
+
+{{- $title := cond .IsHome (printf "%s — %s" .Site.Title .Site.Language.Params.tagline) (printf "%s — %s" .Title .Site.Title) -}}
+{{- $description := .Params.description | default (cond (eq .Site.Language.Lang "fa") .Site.Language.Params.hero_description .Site.Params.description) -}}
+<title>{{ $title }}</title>
+
+<meta name="description" content="{{ $description }}" />
+<meta name="author" content="{{ .Site.Params.author | default .Site.Title }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+{{- end }}
+
+{{- with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
+{{- end }}
+
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:locale" content="{{ .Site.Language.LanguageCode }}" />
+{{- $ogImage := .Params.og_image | default .Site.Params.og_image -}}
+{{- $ogURL := "" -}}
+{{- with $ogImage -}}
+  {{- $ogURL = . | absURL -}}
+{{- else -}}
+  {{- with resources.Get "images/logo.png" -}}
+    {{- $og := partial "image.html" (dict "resource" . "width" 1200 "format" "jpg" "quality" 85) -}}
+    {{- $ogURL = $og.src | absURL -}}
+  {{- end -}}
+{{- end -}}
+{{- with $ogURL }}
+<meta property="og:image" content="{{ . }}" />
+{{- end }}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+{{- with $ogURL }}
+<meta name="twitter:image" content="{{ . }}" />
+{{- end }}
+
+{{- with resources.Get "images/logo.png" }}
+{{- $favicon := partial "image.html" (dict "resource" . "width" 192 "format" "png" "quality" 90) }}
+<link rel="icon" type="image/png" href="{{ $favicon.src }}" />
+{{- end }}
+
+<link rel="preload" href="/fonts/newsreader-latin-wght.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/source-sans-3-latin-wght.woff2" as="font" type="font/woff2" crossorigin />
+{{- if eq .Site.Language.Lang "fa" }}
+<link rel="preload" href="/fonts/vazirmatn-arabic-wght.woff2" as="font" type="font/woff2" crossorigin />
+{{- end }}
+
+{{- if .IsHome }}
+{{- $org := dict
+  "@context" "https://schema.org"
+  "@type" "ResearchOrganization"
+  "name" .Site.Title
+  "alternateName" .Site.Language.Params.tagline
+  "url" .Site.Home.Permalink
+  "description" (cond (eq .Site.Language.Lang "fa") .Site.Language.Params.hero_description .Site.Params.description)
+  "address" (dict "@type" "PostalAddress" "addressLocality" .Site.Language.Params.hero_location)
+-}}
+<script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
+{{- end }}

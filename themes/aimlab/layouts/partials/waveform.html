@@ -1,0 +1,8 @@
+{{- /* Decorative audio waveform. Usage: partial "waveform.html" (dict "class" "h-12 w-full") */ -}}
+{{- $class := .class | default "h-10 w-full" -}}
+{{- $heights := slice 5 12 22 9 17 30 14 7 21 34 16 10 26 19 7 14 31 21 9 16 24 11 18 29 12 7 22 17 10 26 14 21 9 16 27 10 -}}
+<svg class="{{ $class }}" viewBox="0 0 364 60" fill="none" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+  {{- range $i, $h := $heights }}
+  <line x1="{{ add 6 (mul $i 10) }}" y1="{{ sub 30 $h }}" x2="{{ add 6 (mul $i 10) }}" y2="{{ add 30 $h }}" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
+  {{- end }}
+</svg>

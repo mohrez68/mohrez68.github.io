@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ partial "page-header.html" (dict "page" . "eyebrow" (i18n "topics" | default "Topics") "title" .Title "description" .Description) }}
+<section class="bg-surface py-14">
+  <div class="container-page">
+    <ul class="divide-y divide-line border-y border-line">
+      {{ range .Pages }}
+      <li class="flex items-center justify-between gap-4 py-4">
+        <a href="{{ .RelPermalink }}" class="font-medium text-ink no-underline transition-colors hover:text-brand">{{ .Title }}</a>
+        <span class="text-sm text-muted">{{ len .Pages }}</span>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,12 @@
+{{- /* Usage:
+  partial "image.html" (dict "resource" $res "width" 1200 "format" "webp" "quality" 82)
+  Returns a dict with src, width, height.
+*/ -}}
+{{- $r := .resource -}}
+{{- $width := .width | default 1200 -}}
+{{- $format := .format | default "webp" -}}
+{{- $quality := .quality | default 82 -}}
+{{- if and $r (eq $r.ResourceType "image") (ne $r.MediaType.SubType "svg") -}}
+  {{- $r = $r.Resize (printf "%dx %s q%d" $width $format $quality) -}}
+{{- end -}}
+{{- return (dict "src" $r.RelPermalink "width" $r.Width "height" $r.Height) -}}

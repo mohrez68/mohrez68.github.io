@@ -1,0 +1,57 @@
+{{ define "main" }}
+{{- $posts := .Pages.ByDate.Reverse -}}
+{{ partial "page-header.html" (dict "page" . "eyebrow" (i18n "blog" | default "Blog") "title" .Title "description" .Description "lead" .Content) }}
+
+<section class="bg-surface py-14 sm:py-16">
+  <div class="container-page">
+    {{ if $posts }}
+    {{ range first 1 $posts }}
+    <article class="card card-hover p-6 sm:p-8" data-reveal>
+      <div class="grid gap-6 md:grid-cols-[10rem_1fr]">
+        <div class="text-sm text-muted">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "date.html" . }}</time>
+          <p class="mt-1 flex items-center gap-1.5 text-xs">
+            {{ partial "icon.html" (dict "name" "clock" "class" "h-3.5 w-3.5") }}
+            {{ .ReadingTime }} {{ i18n "minRead" | default "min read" }}
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading text-2xl font-semibold leading-snug text-ink sm:text-3xl">
+            <a href="{{ .RelPermalink }}" class="no-underline transition-colors hover:text-brand">{{ .Title }}</a>
+          </h2>
+          {{ with .Description }}<p class="mt-3 max-w-2xl leading-relaxed text-ink-soft">{{ . }}</p>{{ end }}
+          {{ with .Params.tags }}
+          <div class="mt-4 flex flex-wrap gap-2">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+          {{ end }}
+          <a href="{{ .RelPermalink }}" class="link-more mt-5">
+            {{ i18n "readNote" | default "Read note" }}
+            {{ partial "icon.html" (dict "name" "arrow-right" "class" "h-4 w-4 rtl:rotate-180") }}
+          </a>
+        </div>
+      </div>
+    </article>
+    {{ end }}
+
+    {{ if gt (len $posts) 1 }}
+    <div class="mt-10 border-t border-line">
+      {{ range after 1 $posts }}
+      <article class="grid gap-2 border-b border-line py-5 md:grid-cols-[10rem_1fr] md:items-baseline" data-reveal>
+        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-muted">{{ partial "date.html" . }}</time>
+        <div>
+          <h2 class="font-heading text-xl font-semibold leading-snug text-ink">
+            <a href="{{ .RelPermalink }}" class="no-underline transition-colors hover:text-brand">{{ .Title }}</a>
+          </h2>
+          {{ with .Description }}<p class="mt-1 text-sm leading-relaxed text-ink-soft">{{ . }}</p>{{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ else }}
+    <div class="border border-dashed border-line p-12 text-center">
+      <p class="text-ink-soft">{{ i18n "noPosts" | default "No posts yet." }}</p>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,13 @@
+{{- $src := .Destination -}}
+{{- $img := .Page.Resources.GetMatch $src -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+{{- with $img -}}
+  {{- if and (ne .MediaType.SubType "svg") (gt .Width 1400) -}}
+    {{- $img = .Resize "1400x webp q85" -}}
+  {{- end -}}
+  {{- $src = $img.RelPermalink -}}
+  {{- $width = $img.Width -}}
+  {{- $height = $img.Height -}}
+{{- end -}}
+<img src="{{ $src | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $width }} width="{{ $width }}" height="{{ $height }}"{{ end }} loading="lazy" decoding="async">

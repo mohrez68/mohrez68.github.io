@@ -1,0 +1,65 @@
+{{- $currentLang := .Site.Language.Lang -}}
+{{- $availableLangs := slice -}}
+{{- range .Site.Home.AllTranslations -}}
+  {{- $lang := .Language -}}
+  {{- if eq $lang.Lang $currentLang -}}
+    {{- $availableLangs = $availableLangs | append (dict "name" $lang.LanguageName "code" $lang.Lang "url" $.Page.RelPermalink "current" true) -}}
+  {{- else -}}
+    {{- range $.Page.Translations -}}
+      {{- if eq .Language.Lang $lang.Lang -}}
+        {{- $availableLangs = $availableLangs | append (dict "name" $lang.LanguageName "code" $lang.Lang "url" .RelPermalink "current" false) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<header class="site-header">
+  <div class="container-wide">
+    <div class="flex h-[4.5rem] items-center justify-between gap-6">
+      <a href="{{ .Site.Home.RelPermalink }}" class="flex min-w-0 items-center gap-3 no-underline">
+        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-brand font-heading text-[0.72rem] font-semibold tracking-wide text-paper" aria-hidden="true">AIM</span>
+        <span class="min-w-0">
+          <span class="block truncate font-heading text-xl font-semibold leading-tight text-ink">{{ .Site.Title }}</span>
+          <span class="hidden truncate text-[0.68rem] font-medium uppercase tracking-eyebrow text-muted sm:block">{{ .Site.Language.Params.tagline }}</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="{{ i18n "mainNavigation" | default "Main navigation" }}">
+        {{ range .Site.Menus.main }}
+          {{- $url := .URL | relLangURL -}}
+          {{- $active := or (eq $.RelPermalink $url) (and (ne $url "/") (hasPrefix $.RelPermalink $url)) -}}
+          <a href="{{ $url }}" class="nav-link"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ end }}
+        <span class="h-4 w-px bg-line" aria-hidden="true"></span>
+        <div class="flex items-center gap-2 text-sm" aria-label="{{ i18n "language" }}">
+          {{ partial "icon.html" (dict "name" "globe" "class" "h-4 w-4 text-muted") }}
+          {{ range $availableLangs }}
+            <a href="{{ .url }}" lang="{{ .code }}" class="inline-flex h-7 min-w-7 items-center justify-center rounded-sm px-1.5 no-underline transition-colors {{ if .current }}font-semibold text-brand{{ else }}text-muted hover:text-brand{{ end }}"{{ if .current }} aria-current="true"{{ end }}>{{ if eq .code "fa" }}فا{{ else }}{{ upper .code }}{{ end }}</a>
+          {{ end }}
+        </div>
+      </nav>
+
+      <button id="menu-btn" type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-line text-ink lg:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="{{ i18n "menu" | default "Menu" }}">
+        <span class="menu-open-icon">{{ partial "icon.html" (dict "name" "menu" "class" "h-5 w-5") }}</span>
+        <span class="menu-close-icon hidden">{{ partial "icon.html" (dict "name" "close" "class" "h-5 w-5") }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-panel hidden lg:hidden">
+    <div class="container-wide py-4">
+      <nav class="flex flex-col divide-y divide-line" aria-label="{{ i18n "mobileNavigation" | default "Mobile navigation" }}">
+        {{ range .Site.Menus.main }}
+          {{- $url := .URL | relLangURL -}}
+          {{- $active := or (eq $.RelPermalink $url) (and (ne $url "/") (hasPrefix $.RelPermalink $url)) -}}
+          <a href="{{ $url }}" class="py-3 text-base no-underline {{ if $active }}font-semibold text-brand{{ else }}text-ink-soft{{ end }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ end }}
+      </nav>
+      <div class="mt-4 flex items-center gap-3 border-t border-line pt-4 text-sm">
+        {{ partial "icon.html" (dict "name" "globe" "class" "h-4 w-4 text-muted") }}
+        {{ range $availableLangs }}
+          <a href="{{ .url }}" lang="{{ .code }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-sm px-2 no-underline {{ if .current }}font-semibold text-brand{{ else }}text-muted{{ end }}">{{ if eq .code "fa" }}فارسی{{ else }}English{{ end }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</header>

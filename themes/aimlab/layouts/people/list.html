@@ -1,0 +1,4 @@
+{{ define "main" }}
+{{ partial "page-header.html" (dict "page" . "eyebrow" (i18n "people" | default "People") "title" .Title "description" .Description "lead" .Content) }}
+{{ partial "people.html" (dict "page" . "showAll" false "showHeading" false "showFilters" true "borderTop" false) }}
+{{ end }}

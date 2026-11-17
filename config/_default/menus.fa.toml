@@ -1,0 +1,19 @@
+[[main]]
+name = "پژوهش"
+url = "/fa/research/"
+weight = 50
+
+[[main]]
+name = "مقالات"
+url = "/fa/publications/"
+weight = 51
+
+[[main]]
+name = "اعضا"
+url = "/fa/people/"
+weight = 52
+
+[[main]]
+name = "وبلاگ"
+url = "/fa/blog/"
+weight = 53
