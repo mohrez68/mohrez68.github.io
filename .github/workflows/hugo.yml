@@ -31,7 +31,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.147.3
+      # Pinned: 0.146+ rewrote the template system and no longer resolves
+      # section templates such as layouts/people/list.html, which makes the
+      # people/research/publications section pages fall back to _default/list.html.
+      HUGO_VERSION: 0.123.7
     steps:
       - name: Install Hugo CLI
         run: |
