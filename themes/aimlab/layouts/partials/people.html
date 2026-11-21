@@ -3,6 +3,9 @@
 {{- $showFilters := .showFilters | default false -}}
 {{- $showHeading := .showHeading | default true -}}
 {{- $borderTop := .borderTop | default true -}}
+{{- $compact := .compact | default false -}}
+{{- $photoSize := 800 -}}
+{{- if $compact }}{{ $photoSize = 224 }}{{ end -}}
 {{- $section := $page.Site.GetPage "section" "people" -}}
 {{- $members := slice -}}
 {{- with $section }}{{ $members = .Pages.ByWeight }}{{ end -}}
@@ -43,7 +46,11 @@
     {{ end }}
     {{ end }}
 
+    {{ if $compact }}
+    <div id="people-grid" class="mt-8 grid gap-4 sm:grid-cols-2">
+    {{ else }}
     <div id="people-grid" class="mt-10 grid gap-6 sm:grid-cols-2 {{ if gt (len $members) 2 }}lg:grid-cols-3{{ else }}mx-auto max-w-4xl{{ end }}">
+    {{ end }}
       {{ range $members }}
       {{- $memberTitle := .Title -}}
       {{- $photo := .Resources.GetMatch "photo.*" -}}
@@ -66,8 +73,28 @@
       {{- end -}}
       {{- $photoImg := false -}}
       {{- with $photo -}}
-        {{- $photoImg = partial "image.html" (dict "resource" . "width" 800 "height" 800 "mode" "fit" "format" "webp" "quality" 82) -}}
+        {{- $photoImg = partial "image.html" (dict "resource" . "width" $photoSize "height" $photoSize "mode" "fit" "format" "webp" "quality" 82) -}}
       {{- end -}}
+      {{ if $compact }}
+      <article class="group card card-hover flex items-center gap-5 p-5" data-filter-item data-category="{{ $category | default "other" }}">
+        <a href="{{ .RelPermalink }}" class="block h-24 w-24 shrink-0 overflow-hidden bg-brand-soft sm:h-28 sm:w-28">
+          {{ with $photoImg }}
+          <img src="{{ .src }}" width="{{ .width }}" height="{{ .height }}" alt="{{ $memberTitle }}" class="h-full w-full object-contain" loading="lazy">
+          {{ else }}
+          <div class="flex h-full items-center justify-center">
+            <span class="font-heading text-2xl font-semibold tracking-tight text-brand/60">{{ upper $initials }}</span>
+          </div>
+          {{ end }}
+        </a>
+        <div class="min-w-0">
+          {{ with $categoryLabel }}<p class="text-[0.7rem] font-semibold uppercase tracking-eyebrow text-accent">{{ . }}</p>{{ end }}
+          <h3 class="mt-1 font-heading text-xl font-semibold leading-snug text-ink">
+            <a href="{{ .RelPermalink }}" class="no-underline transition-colors hover:text-brand">{{ .Title }}</a>
+          </h3>
+          {{ with .Params.role }}<p class="mt-1 text-sm font-medium text-brand">{{ . }}</p>{{ end }}
+        </div>
+      </article>
+      {{ else }}
       <article class="group card card-hover flex flex-col" data-filter-item data-category="{{ $category | default "other" }}">
         <a href="{{ .RelPermalink }}" class="block overflow-hidden border-b border-line">
           <div class="aspect-square overflow-hidden bg-brand-soft">
@@ -117,6 +144,7 @@
           </div>
         </div>
       </article>
+      {{ end }}
       {{ end }}
     </div>
 
