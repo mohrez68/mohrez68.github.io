@@ -143,4 +143,18 @@
       applyFilter(button.getAttribute('data-filter'));
     });
   });
+
+  if (window.renderMathInElement) {
+    var mathRoot = document.querySelector('.article-body') || document.querySelector('main') || document.body;
+
+    window.renderMathInElement(mathRoot, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      throwOnError: false
+    });
+  }
 })();

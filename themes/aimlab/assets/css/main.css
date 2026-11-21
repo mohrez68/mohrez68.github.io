@@ -313,6 +313,21 @@
     @apply border-b border-line/70 py-2;
   }
 
+  .article-body .katex-display {
+    @apply my-6 overflow-x-auto overflow-y-hidden py-1;
+  }
+
+  .article-body .katex {
+    @apply text-[1.05em];
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  html[lang^='fa'] .article-body .katex-display {
+    direction: ltr;
+    text-align: center;
+  }
+
   html[lang^='fa'] .article-body {
     max-width: 66ch;
     text-align: right;
