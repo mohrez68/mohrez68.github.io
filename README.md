@@ -6,7 +6,7 @@ The site is bilingual (English and Persian) and includes research pages, publica
 
 ## Requirements
 
-- Hugo Extended **0.123+** (CI builds with 0.147.3)
+- Hugo Extended **0.123.7** (the version used by Cloudflare Pages)
 - Node.js and npm
 
 ## Local development
@@ -28,7 +28,7 @@ The generated site is written to `public/`. Hugo runs Tailwind through PostCSS, 
 
 ## Deployment
 
-A GitHub Actions workflow is included at `.github/workflows/hugo.yml`. Pushing to `main` builds the site and deploys it to GitHub Pages. The custom domain is configured in `CNAME` (`aimlab.ir`).
+Pushing to `main` triggers an automatic build on **Cloudflare Pages** (project `mohrez68-github-io`). The site is served at `aimlab.ir`; DNS and the custom domain are managed in Cloudflare. The Pages project uses `HUGO_VERSION=0.123.7`.
 
 ## Project structure
 
