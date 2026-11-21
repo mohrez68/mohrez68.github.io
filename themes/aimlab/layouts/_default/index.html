@@ -90,9 +90,11 @@
               <a href="{{ .RelPermalink }}" class="no-underline transition-colors hover:text-brand">{{ .Title }}</a>
             </h3>
             {{ with .Description }}<p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{{ . }}</p>{{ end }}
+            {{ with .Params.tags }}
             <div class="mt-4 flex flex-wrap gap-2">
-              {{ range first 3 .Params.tags }}<span class="tag">{{ . }}</span>{{ end }}
+              {{ range first 3 . }}<span class="tag">{{ . }}</span>{{ end }}
             </div>
+            {{ end }}
             <a href="{{ .RelPermalink }}" class="link-more mt-5">
               {{ i18n "readNote" | default "Read note" }}
               {{ partial "icon.html" (dict "name" "arrow-right" "class" "h-4 w-4 rtl:rotate-180") }}
