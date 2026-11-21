@@ -25,10 +25,14 @@
     </a>
 
     <div class="mt-8 grid gap-10 border-b border-line pb-12 md:grid-cols-[15rem_1fr] md:items-start lg:gap-14">
+      {{- $photoImg := false -}}
+      {{- with $photo -}}
+        {{- $photoImg = partial "image.html" (dict "resource" . "width" 800 "height" 800 "mode" "fit" "format" "webp" "quality" 85) -}}
+      {{- end -}}
       <div class="w-56 max-w-full overflow-hidden border border-line bg-brand-soft">
-        <div class="aspect-[4/5]">
-          {{ with $photo }}
-          <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" class="h-full w-full object-cover">
+        <div class="aspect-square">
+          {{ with $photoImg }}
+          <img src="{{ .src }}" width="{{ .width }}" height="{{ .height }}" alt="{{ $.Title }}" class="h-full w-full object-contain">
           {{ else }}
           <div class="flex h-full items-center justify-center">
             <span class="font-heading text-6xl font-semibold tracking-tight text-brand/60">{{ upper $initials }}</span>
